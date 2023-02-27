@@ -1,21 +1,14 @@
+import java.util.Objects;
+
 public class MyArrayList<T> {
-    int size = 0;
-    int pointer = 0;
-    public Object[] arr;
+    public static final int DEFAULT_CAPACITY = 10;
+    private int size = 0;
+    private int pointer = 0;
+    private Object[] arr;
 
     public MyArrayList() {
-        arr = new Object[10];
-    }
-
-    public MyArrayList(int initialSize) {
-        if (initialSize > 0) {
-            arr = new Object[initialSize];
-        } else if (initialSize == 0) {
-            arr = new Object[]{};
-        } else {
-            throw new IllegalArgumentException("Illegal Capacity: " +
-                    initialSize);
-        }
+        size = 0;
+        arr = new Object[DEFAULT_CAPACITY];
     }
 
     public void add(T value) {
@@ -28,15 +21,13 @@ public class MyArrayList<T> {
         size++;
     }
 
-    public void remove(int index) throws ArrayIndexOutOfBoundsException {
-        if (index >= 0 && index <= size) {
-            for (int i = index; i < size; i++) {
+    public Object remove(int index) throws IndexOutOfBoundsException {
+        Objects.checkIndex(index, size);
+        for (int i = index; i < size; i++) {
                 arr[i] = arr[i + 1];
             }
             size--;
-        } else {
-            throw new ArrayIndexOutOfBoundsException();
-        }
+        return arr[index];
     }
 
     public void clear() {
@@ -50,11 +41,8 @@ public class MyArrayList<T> {
         return size;
     }
 
-    public T get(int index) throws ArrayIndexOutOfBoundsException {
-        if (index >= 0 && index <= size) {
+    public T get(int index) throws IndexOutOfBoundsException {
+            Objects.checkIndex(index, size);
             return (T) arr[index];
-        } else {
-            throw new ArrayIndexOutOfBoundsException();
-        }
     }
 }

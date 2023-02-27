@@ -1,5 +1,7 @@
+import java.util.Objects;
+
 public class MyStack<T> {
-        public int size = 0;
+        private int size = 0;
         private Node<T> first = null;
         private Node<T> last = null;
 
@@ -24,7 +26,8 @@ public class MyStack<T> {
             }
             size++;
         }
-        public void remove(int index) {
+        public void remove(int index) throws IndexOutOfBoundsException {
+            Objects.checkIndex(index, size);
             Node<T> currentElement = last;
             Node<T> afterRemovingElement = null;
             Node<T> beforeRemovingElement = null;

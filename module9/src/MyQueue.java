@@ -1,5 +1,5 @@
 public class MyQueue<T> {
-    public int size = 0;
+    private int size = 0;
     private Node<T> first = null;
     private Node<T> last = null;
 

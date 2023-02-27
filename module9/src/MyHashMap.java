@@ -1,5 +1,7 @@
+import java.util.Objects;
+
 public class MyHashMap<K, V> {
-    public int size = 0;
+    private int size = 0;
     private Node<K, V> first = null;
     private Node<K, V> last = null;
 
@@ -26,7 +28,8 @@ public class MyHashMap<K, V> {
         }
         size++;
     }
-            public void remove(int index) {
+            public void remove(int index) throws IndexOutOfBoundsException {
+                Objects.checkIndex(index, size);
                 Node<K, V> currentElement = first;
                 Node<K, V> afterRemovingElement = null;
                 Node<K, V> beforeRemovingElement = null;
