@@ -28,7 +28,7 @@ public class MyHashMap<K, V> {
         }
         size++;
     }
-            public void remove(int index) throws IndexOutOfBoundsException {
+            public V remove(int index) throws IndexOutOfBoundsException {
                 Objects.checkIndex(index, size);
                 Node<K, V> currentElement = first;
                 Node<K, V> afterRemovingElement = null;
@@ -37,13 +37,17 @@ public class MyHashMap<K, V> {
                         first = null;
                         last = null;
                         size = 0;
+                        return null;
                     } else if (size == 2) {
                         if (index == 1) {
                             first = null;
+                            size--;
+                            return last.value;
                         } else {
                             last = null;
+                            size--;
+                            return first.value;
                         }
-                        size--;
                     } else {
                         for (int i = 0; i <= size; i++) {
                             if (i == index + 1) {
@@ -56,7 +60,9 @@ public class MyHashMap<K, V> {
                     }
                         beforeRemovingElement.next = afterRemovingElement;
                 }
+                    currentElement = beforeRemovingElement.next;
                     size--;
+                    return currentElement.value;
             }
     public void clear() {
         first = null;

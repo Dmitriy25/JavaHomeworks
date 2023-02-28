@@ -27,7 +27,7 @@ public class MyLinkedList<T> {
         }
         size++;
     }
-    public void remove(int index) throws IndexOutOfBoundsException {
+    public T remove(int index) throws IndexOutOfBoundsException {
         Objects.checkIndex(index, size);
         Node<T> currentElement = last;
         Node<T> afterRemovingElement = null;
@@ -36,26 +36,32 @@ public class MyLinkedList<T> {
             first = null;
             last = null;
             size = 0;
+            return null;
         } else if (size == 2) {
             if (index == 1) {
                 first = null;
+                size--;
+                return currentElement.element;
             } else {
                 last = null;
+                size--;
+                return currentElement.prev.element;
             }
-            size--;
         } else {
-            for (int i = size; i > 0; i--) {
+            for (int i = 0; i <= size; i++) {
                 if (i == index + 1) {
                     afterRemovingElement = currentElement;
+                    break;
                 } else if (i == index - 1) {
                     beforeRemovingElement = currentElement;
-                    break;
                 }
-                currentElement = currentElement.prev;
+                currentElement = currentElement.next;
             }
-            afterRemovingElement.prev = beforeRemovingElement;
+            currentElement = afterRemovingElement.prev;
+            beforeRemovingElement.next = afterRemovingElement;
         }
         size--;
+        return currentElement.element;
     }
     public void clear() {
         first = null;

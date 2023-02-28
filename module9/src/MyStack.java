@@ -26,7 +26,7 @@ public class MyStack<T> {
             }
             size++;
         }
-        public void remove(int index) throws IndexOutOfBoundsException {
+        public T remove(int index) throws IndexOutOfBoundsException {
             Objects.checkIndex(index, size);
             Node<T> currentElement = last;
             Node<T> afterRemovingElement = null;
@@ -35,13 +35,17 @@ public class MyStack<T> {
                     first = null;
                     last = null;
                     size = 0;
+                    return null;
                 } else if (size == 2) {
                     if (index == 1) {
                         first = null;
+                        size--;
+                        return last.element;
                     } else {
                         last = null;
+                        size--;
+                        return first.element;
                     }
-                    size--;
                 } else {
                     for (int i = size; i > 0; i--) {
                         if (i == index + 1) {
@@ -52,9 +56,11 @@ public class MyStack<T> {
                         }
                         currentElement = currentElement.prev;
                 }
+                    currentElement = afterRemovingElement.prev;
                     afterRemovingElement.prev = beforeRemovingElement;
             }
                 size--;
+                return currentElement.element;
         }
         public void clear() {
             first = null;
@@ -64,12 +70,12 @@ public class MyStack<T> {
         public int size() {
             return size;
         }
-        public Node<T> peek() {
-            return last;
+        public T peek() {
+            return last.element;
         }
-        public Node<T> pop() {
-            Node<T> currentElement = last;
+        public T pop() {
+            Node<T> result = last;
             last = last.prev;
-            return currentElement;
+            return result.element;
         }
 }

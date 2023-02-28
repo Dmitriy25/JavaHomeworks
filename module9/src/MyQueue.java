@@ -32,12 +32,12 @@ public class MyQueue<T> {
     public int size() {
         return size;
     }
-    public Node<T> peek() {
-        return first;
+    public T peek() {
+        return first.element;
     }
-    public Node<T> poll() {
+    public T poll() {
         Node<T> result = first;
         first = first.next;
-        return result;
+        return result.element;
     }
 }

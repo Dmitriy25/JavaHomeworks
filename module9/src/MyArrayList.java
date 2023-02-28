@@ -2,8 +2,7 @@ import java.util.Objects;
 
 public class MyArrayList<T> {
     public static final int DEFAULT_CAPACITY = 10;
-    private int size = 0;
-    private int pointer = 0;
+    private int size;
     private Object[] arr;
 
     public MyArrayList() {
@@ -12,28 +11,27 @@ public class MyArrayList<T> {
     }
 
     public void add(T value) {
-        if (pointer == arr.length - 1) {
+        if (size < arr.length) {
             Object[] newArr = new Object[arr.length * 2];
-            System.arraycopy(arr, 0, newArr, 0, pointer);
+            System.arraycopy(arr, 0, newArr, 0, size);
             arr = newArr;
         }
-        arr[pointer++] = value;
-        size++;
+        arr[size++] = value;
     }
 
-    public Object remove(int index) throws IndexOutOfBoundsException {
+    public T remove(int index) throws IndexOutOfBoundsException {
         Objects.checkIndex(index, size);
-        for (int i = index; i < size; i++) {
-                arr[i] = arr[i + 1];
-            }
-            size--;
-        return arr[index];
+        T tmp = (T) arr[index];
+        for (int i = index; i < size - 1; i++) {
+            arr[i] = arr[i + 1];
+        }
+        size--;
+        arr[size] = null;
+        return tmp;
     }
 
     public void clear() {
-        for (int i = 0; i < size; i++) {
-            arr[i] = null;
-        }
+        arr = new Object[DEFAULT_CAPACITY];
         size = 0;
     }
 
