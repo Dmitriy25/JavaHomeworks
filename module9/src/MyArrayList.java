@@ -11,7 +11,7 @@ public class MyArrayList<T> {
     }
 
     public void add(T value) {
-        if (size < arr.length) {
+        if (size == arr.length) {
             Object[] newArr = new Object[arr.length * 2];
             System.arraycopy(arr, 0, newArr, 0, size);
             arr = newArr;
