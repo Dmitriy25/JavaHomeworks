@@ -37,7 +37,9 @@ public class MyLinkedList<T> {
         }
         if (index == 0) {
             first = currentNode.next;
-            first.prev = null;
+            if (first == null) {
+                last = null;
+            }
         } else if (index == size) {
             last = currentNode.prev;
             last.next = null;
