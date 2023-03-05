@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class FileToJson {
     private List<User> users = new ArrayList<>();
 
-    public void usersFromTxtToJson(String filePath) {
+    public void usersFromTxtToJson(String filePath) throws IOException {
 
         File file = new File(filePath);
         InputStream fis = null;
@@ -32,6 +32,7 @@ public class FileToJson {
         }
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         gson.toJson(users, fileWriter);
+        fileWriter.close();
         System.out.println(gson.toJson(users));
     }
 }
