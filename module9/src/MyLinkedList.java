@@ -36,13 +36,11 @@ public class MyLinkedList<T> {
             }
         }
         if (index == 0) {
-            first = first.next;
+            first = currentNode.next;
             first.prev = null;
-            return currentNode.element;
         } else if (index == size) {
-            last = last.prev;
+            last = currentNode.prev;
             last.next = null;
-            return currentNode.element;
         } else {
             currentNode.prev.next = currentNode.next;
             currentNode.next.prev = currentNode.prev;
