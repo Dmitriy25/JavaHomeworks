@@ -30,11 +30,6 @@ public class MyLinkedList<T> {
     public T remove(int index) throws IndexOutOfBoundsException {
         Objects.checkIndex(index, size);
         Node<T> currentNode = first;
-        for (int i = 0; i <= size; i++) {
-            if (i != index) {
-                currentNode = currentNode.next;
-            }
-        }
         if (index == 0) {
             first = currentNode.next;
             if (first == null) {
